@@ -60,6 +60,14 @@ function expenseAdd(newExpense) {
         const expenseCategory = document.createElement("span");
         expenseCategory.textContent = newExpense.category_name;
 
+        const expenseAmount = document.createElement("span");
+        expenseAmount.classList.add("expense-amount");
+        expenseAmount.textContent = newExpense.amount;
+
+        const removeIcon = document.createElement("img");
+        removeIcon.classList.add("remove-icon");
+        removeIcon.setAttribute("src", "img/remove.svg")
+        removeIcon.setAttribute("alt", "remover");
 
         // adicionando os items na lista:
         ExpenseList.append(expenseItem)
@@ -67,10 +75,12 @@ function expenseAdd(newExpense) {
         expenseItem.append(expenseInfo);
         expenseInfo.append(expenseName);
         expenseInfo.append(expenseCategory);
+        expenseItem.append(expenseAmount)
+        expenseItem.append(removeIcon)
 
     } catch (error) {
         alert("Não foi possível atualizar a lista de despesas.")
         console.log(error)
     }
+    console.log(newExpense)
 }
-
