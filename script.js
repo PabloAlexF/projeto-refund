@@ -5,6 +5,8 @@ const category = document.getElementById("category")
 
 // Selecionando os elementos da lista:
 const ExpenseList = document.querySelector("ul");
+const expenseQuantity = document.querySelector("aside header p span" )
+const totalValue = document.querySelector("aside header h2")
 
 
 amount.oninput = () => {
@@ -78,9 +80,53 @@ function expenseAdd(newExpense) {
         expenseItem.append(expenseAmount)
         expenseItem.append(removeIcon)
 
+        updateTotals()
+        
+
+
+
+
+        removeIcon.addEventListener("click", () => {
+            removeItems()
+           
+            
+        })
     } catch (error) {
         alert("Não foi possível atualizar a lista de despesas.")
         console.log(error)
     }
     console.log(newExpense)
 }
+
+
+
+function updateTotals() {
+    try {
+        const items = ExpenseList.children;
+        expenseQuantity.textContent = `${items.length} ${items.length > 1 ? "Despesas" : "Despesa"} `
+
+        let total = 0
+        //percorre cada li da ul:
+        for (let item = 0; item < items.length; item++) {
+            const itemAmount = items[item].querySelector(".expense-amount");
+
+            let value = itemAmount.textContent.replace(/[^\d]/g, "").replace(",", ".");
+            
+            value = parseFloat(value);
+
+            if (isNaN(value)) {
+                return alert("Não foi possivel calcular o total. O valor não parece ser uma numero.");
+            }
+
+            total += Number(value);
+        }
+
+        totalValue.textContent = total;
+    } catch (error) {
+        console.log(error);
+        alert("Não foi possivel atualizar o status !")
+    }
+}
+
+
+
