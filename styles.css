@@ -5,8 +5,35 @@
 }
 
 :root {
-  font-family: "Open Sans", sans-serif;
-  font-size: 16px;
+  --color-primary: #3b82f6;
+  --color-primary-hover: #2563eb;
+  --color-primary-light: rgba(59, 130, 246, 0.1);
+  --color-secondary: #8b5cf6;
+  --color-text: #1f2937;
+  --color-text-muted: #6b7280;
+  --color-text-light: #9ca3af;
+  --color-card: #ffffff;
+  --color-border: #e5e7eb;
+  --font-family: "Open Sans", sans-serif;
+  --font-size-base: 16px;
+  --font-size-sm: 0.75rem;
+  --font-size-xs: 0.62rem;
+  --font-size-md: 0.87rem;
+  --font-size-lg: 1rem;
+  --font-size-xl: 1.25rem;
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 0.75rem;
+  --spacing-lg: 1rem;
+  --spacing-xl: 1.25rem;
+  --spacing-2xl: 1.5rem;
+  --spacing-3xl: 2rem;
+  --spacing-4xl: 2.5rem;
+  --spacing-5xl: 3rem;
+  --border-radius: 0.5rem;
+  --border-radius-lg: 1rem;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
 }
 
 ::-webkit-scrollbar {
@@ -18,51 +45,100 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #e4ece9;
+  background: var(--color-primary);
+  border-radius: var(--border-radius);
 }
 
 body {
   width: 100%;
-  height: 100vh;
-
-  background-color: #e4ece9;
-
+  min-height: 100vh;
+  background: radial-gradient(ellipse at center, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: var(--color-text);
+  position: relative;
+}
 
-  color: #1f2523;
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: -1;
 }
 
 .logo {
-  margin: 3rem 0 2rem;
+  margin: var(--spacing-5xl) 0 var(--spacing-3xl);
+  padding: var(--spacing-lg);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--border-radius-lg);
+  background: rgba(59, 130, 246, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logo:hover {
+  border-color: var(--color-secondary);
+  background: rgba(139, 92, 246, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 25px rgba(59, 130, 246, 0.4),
+    0 0 30px rgba(139, 92, 246, 0.2);
 }
 
 main section {
   display: flex;
   flex: 1;
-  gap: 1.25rem;
-  padding-bottom: 2rem;
+  gap: var(--spacing-xl);
+  padding-bottom: var(--spacing-3xl);
 }
 
 form {
-  background-color: #f9fbfa;
-  border-radius: 1rem;
-  padding: 2.5rem;
+  background: var(--color-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-4xl);
   max-width: 462px;
-
   display: flex;
   flex-direction: column;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 8px 16px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
 }
 
 form h1 {
-  font-size: 1.25rem;
+  font-size: var(--font-size-xl);
+  color: var(--color-text);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
 }
 
 form p {
-  font-size: 0.87rem;
-  color: #4d5c57;
-  margin: 0.75rem 0 2.5rem;
+  font-size: var(--font-size-md);
+  color: var(--color-text-muted);
+  margin: var(--spacing-md) 0 var(--spacing-4xl);
 }
 
 fieldset {
@@ -72,27 +148,30 @@ fieldset {
 
 fieldset legend {
   text-transform: uppercase;
-  font-size: 0.62rem;
-  color: #4d5c57;
-  margin-bottom: 0.5rem;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-sm);
+  font-weight: 600;
+  letter-spacing: 0.8px;
 }
 
 fieldset:focus-within legend {
-  color: #1f8459;
+  color: var(--color-primary);
   font-weight: 700;
 }
 
 input,
 select {
   flex: 1;
-  height: 3rem;
-  border-radius: 0.5rem;
-  border: 1px solid #cdd5d2;
-  padding: 0 1rem;
-  font-size: 0.87rem;
-  color: #1f2523;
-  background-color: transparent;
+  height: var(--spacing-5xl);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-border);
+  padding: 0 var(--spacing-lg);
+  font-size: var(--font-size-md);
+  color: var(--color-text);
+  background: #ffffff;
   outline: none;
+  transition: all 0.2s ease;
 }
 
 select {
@@ -105,20 +184,20 @@ select {
 
 input::placeholder,
 select:invalid {
-  color: #4d5c57;
+  color: var(--color-text-muted);
 }
 
 input:focus,
 select:focus {
-  border: 1.5px solid #1f8459;
+  border: 2px solid var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
 }
 
 .inputs-row {
   display: flex;
   flex: 1;
-
-  gap: 1rem;
-  margin-top: 1rem;
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-lg);
 }
 
 .inputs-row fieldset:first-child {
@@ -130,86 +209,88 @@ select:focus {
 }
 
 form button {
-  height: 3rem;
-  border-radius: 0.5rem;
+  height: var(--spacing-5xl);
+  border-radius: var(--border-radius);
   border: none;
-  font-size: 0.87rem;
+  font-size: var(--font-size-md);
   color: #ffffff;
-  background-color: #1f8459;
+  background: var(--color-primary);
   font-weight: 700;
-  padding: 1rem 1.25rem;
+  padding: var(--spacing-lg) var(--spacing-xl);
   cursor: pointer;
-
-  transition: background-color 0.2s;
+  transition: all 0.2s ease;
 }
 
 button:hover {
-  background-color: #2cb178;
+  background: var(--color-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
 form button:last-child {
-  margin-top: 2rem;
+  margin-top: var(--spacing-3xl);
 }
 
 aside {
-  background-color: #f9fbfa;
-  border-radius: 1rem;
-  padding: 2.5rem;
+  background: var(--color-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-4xl);
   max-width: 462px;
-
   min-width: 600px;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 8px 16px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 aside header {
   display: flex;
   justify-content: space-between;
-
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  border-bottom-color: #e4ece9;
-  padding-bottom: 1.5rem;
-  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--spacing-2xl);
+  margin-bottom: var(--spacing-2xl);
 }
 aside header p {
-  color: #4d5c57;
+  color: var(--color-text-muted);
   font-weight: 400;
-  font-size: 1rem;
+  font-size: var(--font-size-lg);
 }
 
 aside header p span {
-  color: #4d5c57;
+  color: var(--color-text-muted);
   font-weight: 400;
-  font-size: 0.87rem;
+  font-size: var(--font-size-md);
 }
 
 aside header p i {
-  color: #cdd5d2;
-  margin: 0 0.5rem;
+  color: var(--color-text-light);
+  margin: 0 var(--spacing-sm);
   font-style: normal;
 }
 
 aside header h2 {
-  font-size: 1rem;
-  color: #1f2523;
+  font-size: var(--font-size-lg);
+  color: var(--color-text);
 }
 
 aside header small {
-  color: #4d5c57;
+  color: var(--color-text-muted);
   font-weight: 400;
-  font-size: 0.75rem;
-  margin-right: 0.25rem;
+  font-size: var(--font-size-sm);
+  margin-right: var(--spacing-xs);
 }
 
 aside ul {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-
+  gap: var(--spacing-lg);
   max-height: 310px;
   min-height: 310px;
-
-  overflow-y: scroll;
+  overflow-y: auto;
+  scrollbar-width: thin;
 }
 
 .expense {
@@ -218,11 +299,11 @@ aside ul {
   height: 38px;
 }
 
- .iconslist {
-  width: 2rem;
-  height: 2rem;
-
-  margin-right: 0.75rem;
+.iconslist {
+  width: var(--spacing-3xl);
+  height: var(--spacing-3xl);
+  margin-right: var(--spacing-md);
+  flex-shrink: 0;
 }
 
 .expense > div {
@@ -232,38 +313,41 @@ aside ul {
 }
 
 .expense-info strong {
-  font-size: 0.87rem;
-  color: #1f2523;
+  font-size: var(--font-size-md);
+  color: var(--color-text);
 }
 
 .expense-info span {
-  font-size: 0.75rem;
-  color: #4d5c57;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
 }
 
 .expense-amount {
-  font-size: 0.87rem;
-  color: #1f2523;
+  font-size: var(--font-size-md);
+  color: var(--color-text);
   font-weight: 600;
 }
 
 .expense-amount small {
-  font-size: 0.75rem;
-  color: #4d5c57;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
   font-weight: 400;
-  margin-right: 0.25rem;
+  margin-right: var(--spacing-xs);
 }
 
 .remove-icon {
-  height: 1rem;
-  margin-left: 0.5rem;
-
+  height: var(--spacing-lg);
+  margin-left: var(--spacing-sm);
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: all 0.2s ease;
+  border-radius: var(--border-radius);
+  padding: 2px;
 }
 
 .remove-icon:hover {
   opacity: 0.7;
+  background-color: rgba(255, 0, 0, 0.1);
+  transform: scale(1.1);
 }
 
 @media (min-width: 1100px) {
@@ -285,8 +369,7 @@ aside ul {
   main section {
     flex-direction: column;
     width: 100%;
-
-    padding: 1.5rem;
+    padding: var(--spacing-2xl);
   }
 
   main section form {
