@@ -81,16 +81,6 @@ function expenseAdd(newExpense) {
         expenseItem.append(removeIcon)
 
         updateTotals()
-        
-
-
-
-
-        removeIcon.addEventListener("click", () => {
-            removeItems()
-           
-            
-        })
     } catch (error) {
         alert("Não foi possível atualizar a lista de despesas.")
         console.log(error)
@@ -129,4 +119,9 @@ function updateTotals() {
 }
 
 
+ExpenseList.addEventListener("click", function(event) {
+    if(event.target.classList.contains("remove-icon")){
+        console.log(event)
 
+    }
+})
