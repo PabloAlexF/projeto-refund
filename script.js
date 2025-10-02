@@ -86,6 +86,7 @@ function expenseAdd(newExpense) {
         console.log(error)
     }
     console.log(newExpense)
+    clearForm()
 }
 
 
@@ -128,3 +129,12 @@ ExpenseList.addEventListener("click", function(event) {
         updateTotals();
     }
 })
+
+
+function clearForm() {
+    expense.value = "";
+    amount.value = "";
+    category.value = "";
+
+    expense.focus()
+}
