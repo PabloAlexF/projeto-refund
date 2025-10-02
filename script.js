@@ -110,7 +110,7 @@ function updateTotals() {
         for (let item = 0; item < items.length; item++) {
             const itemAmount = items[item].querySelector(".expense-amount");
 
-            let value = itemAmount.textContent.replace(/[^\d]/g, "").replace(",", ".");
+            let value = itemAmount.textContent.replace(/[^\d,]/g, "").replace(",", ".");
             
             value = parseFloat(value);
 
@@ -121,7 +121,7 @@ function updateTotals() {
             total += Number(value);
         }
 
-        totalValue.textContent = total;
+        totalValue.textContent = formatCurrencyBRL(total);
     } catch (error) {
         console.log(error);
         alert("Não foi possivel atualizar o status !")
